@@ -17,6 +17,10 @@ gem 'figaro'
 
 gem 'rack-cors', require: 'rack/cors'
 
+gem 'webpush'
+
+gem 'whenever', require: false
+
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 	
 	scope '/usuario' do
 		post 'cadastro' => 'usuario#cadastro'
+		post 'webpush' => 'usuario#webPush'
 	end
 	
 	scope '/jornada-trabalho' do

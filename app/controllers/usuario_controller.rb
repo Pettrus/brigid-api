@@ -1,4 +1,5 @@
 class UsuarioController < ApplicationController
+	before_action :authenticate_usuario!, only: [:webPush]
 	
 	def cadastro
 		cadastrado = Usuario.where(email: usuario_p[:email]).first
@@ -12,6 +13,14 @@ class UsuarioController < ApplicationController
 		usuario.save()
 		
 		render json: false
+	end
+	
+	def webPush
+		usuario = Usuario.where(id: current_usuario.id).first
+		usuario.update_attributes(endpoint: params[:subscription][:endpoint], p256dh: params[:subscription][:keys][:p256dh],
+			auth: params[:subscription][:keys][:auth])
+		
+		render json: true
 	end
 	
 	private

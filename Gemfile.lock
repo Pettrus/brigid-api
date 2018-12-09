@@ -65,6 +65,7 @@ GEM
       capistrano (~> 3.7)
       capistrano-bundler
       puma (~> 3.4)
+    chronic (0.10.2)
     concurrent-ruby (1.1.3)
     crass (1.0.4)
     devise (4.5.0)
@@ -82,8 +83,10 @@ GEM
       thor (~> 0.14)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    hkdf (0.3.0)
     i18n (1.1.1)
       concurrent-ruby (~> 1.0)
+    jwt (2.1.0)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -160,9 +163,14 @@ GEM
       thread_safe (~> 0.1)
     warden (1.2.8)
       rack (>= 2.0.6)
+    webpush (0.3.4)
+      hkdf (~> 0.2)
+      jwt (~> 2.0)
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
+    whenever (0.10.0)
+      chronic (>= 0.6.3)
 
 PLATFORMS
   ruby
@@ -185,6 +193,8 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
+  webpush
+  whenever
 
 BUNDLED WITH
    1.16.6

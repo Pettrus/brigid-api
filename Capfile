@@ -6,6 +6,7 @@ require 'capistrano/rails/migrations'
 require 'capistrano/bundler'
 require 'capistrano/rvm'
 require 'capistrano/figaro_yml'
+require 'whenever/capistrano'
 require 'capistrano/puma'
 install_plugin Capistrano::Puma
 
