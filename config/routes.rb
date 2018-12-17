@@ -13,4 +13,6 @@ Rails.application.routes.draw do
 		post 'registrar-ponto' => 'jornada_trabalho#registrarPonto'
 		post 'sincronizar' => 'jornada_trabalho#sincronizarOffline'
 	end
+	
+	resources :eventos
 end

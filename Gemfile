@@ -19,6 +19,10 @@ gem 'rack-cors', require: 'rack/cors'
 
 gem 'webpush'
 
+gem 'strip_attributes'
+
+gem 'validates_timeliness', '~> 5.0.0.alpha3'
+
 gem 'whenever', require: false
 
 # Use Puma as the app server

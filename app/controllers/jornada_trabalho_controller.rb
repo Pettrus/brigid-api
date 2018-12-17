@@ -20,11 +20,16 @@ class JornadaTrabalhoController < ApplicationController
 			if jornada.nil?
 				novaJornada = JornadaTrabalho.salvar(current_usuario.id)
 
-				render json: novaJornada
+				render json: {
+					jornada: novaJornada
+				}
 			else
-				JornadaTrabalho.atualizar(jornada, current_usuario)
+				horas = JornadaTrabalho.atualizar(jornada, current_usuario)
 
-				render json: jornada
+				render json: {
+					jornada: jornada,
+					horas: horas
+				}
 			end
 		end
 	end

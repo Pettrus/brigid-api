@@ -157,10 +157,15 @@ GEM
     sshkit (1.18.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    strip_attributes (1.8.0)
+      activemodel (>= 3.0, < 6.0)
     thor (0.20.3)
     thread_safe (0.3.6)
+    timeliness (0.3.8)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    validates_timeliness (5.0.0.alpha3)
+      timeliness (~> 0.3.8)
     warden (1.2.8)
       rack (>= 2.0.6)
     webpush (0.3.4)
@@ -192,7 +197,9 @@ DEPENDENCIES
   rails (~> 5.0.7)
   spring
   spring-watcher-listen (~> 2.0.0)
+  strip_attributes
   tzinfo-data
+  validates_timeliness (~> 5.0.0.alpha3)
   webpush
   whenever
 

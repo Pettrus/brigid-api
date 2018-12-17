@@ -10,12 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181209124053) do
+ActiveRecord::Schema.define(version: 20181216220902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pgcrypto"
   enable_extension "uuid-ossp"
+
+  create_table "eventos", force: :cascade do |t|
+    t.string   "nome",        limit: 70, null: false
+    t.float    "horas",                  null: false
+    t.date     "competencia",            null: false
+    t.uuid     "usuario_id",             null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["usuario_id"], name: "index_eventos_on_usuario_id", using: :btree
+  end
 
   create_table "jornada_trabalhos", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.date     "competencia", null: false
@@ -52,5 +62,6 @@ ActiveRecord::Schema.define(version: 20181209124053) do
     t.index ["uid", "provider"], name: "index_usuarios_on_uid_and_provider", unique: true, using: :btree
   end
 
+  add_foreign_key "eventos", "usuarios"
   add_foreign_key "jornada_trabalhos", "usuarios"
 end

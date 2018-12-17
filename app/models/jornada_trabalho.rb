@@ -16,7 +16,7 @@ class JornadaTrabalho < ApplicationRecord
 		
 		horas = ((Time.now - jornada.inicio) / 1.hours) - tempJornada
 		jornada.update_attributes(fim: Time.now, horas: horas)
-		atualizarHorasUsuario(usuario.id, horas)
+		return atualizarHorasUsuario(usuario.id, horas, tempJornada)
 	end
 	
 	def self.salvarOffline(jornada, usuario)
@@ -24,7 +24,7 @@ class JornadaTrabalho < ApplicationRecord
 		
 		if !jornada.fim.nil?
 			jornada.horas = ((jornada.fim - jornada.inicio) / 1.hours) - tempJornada
-			atualizarHorasUsuario(usuario.id, jornada.horas)
+			atualizarHorasUsuario(usuario.id, jornada.horas, tempJornada)
 		end
 		
 		jornada.usuario_id = usuario.id
@@ -38,9 +38,9 @@ class JornadaTrabalho < ApplicationRecord
 		horas = ((Time.parse(jornada[:fim]) - jornadaTrab.inicio) / 1.hours) - tempJornada
 		
 		jornadaTrab.update_attributes(fim: jornada[:fim], horas: horas)
-		atualizarHorasUsuario(usuario.id, horas)
+		atualizarHorasUsuario(usuario.id, horas, tempJornada)
 	end
-		
+	
 	private
 		
 	def self.tempoJornadaDia(competencia, usuario)
@@ -59,8 +59,13 @@ class JornadaTrabalho < ApplicationRecord
 		return tempJornada
 	end
 	
-	def self.atualizarHorasUsuario(id, horas)
+	def self.atualizarHorasUsuario(id, horas, jornadaAnterior)
 		usuario = Usuario.where(id: id).first
-		usuario.update_attributes(horas_extras: usuario.horas_extras + horas)
+		
+		extras = usuario.horas_extras - (jornadaAnterior * -1)
+		
+		usuario.update_attributes(horas_extras: extras + horas)
+		
+		return extras + horas
 	end
 end
