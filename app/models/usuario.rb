@@ -27,4 +27,18 @@ class Usuario < ActiveRecord::Base
 			)
 		end
 	end
+	
+	def self.atualizarHorasUsuario(id, horas, jornadaAnterior)
+		usuario = Usuario.where(id: id).first
+		
+		if jornadaAnterior < 0
+			extras = usuario.horas_extras - jornadaAnterior
+		else
+			extras = 0
+		end
+		
+		usuario.update_attributes(horas_extras: extras + horas)
+		
+		return extras + horas
+	end
 end

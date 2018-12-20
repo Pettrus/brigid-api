@@ -8,11 +8,8 @@ Rails.application.routes.draw do
 	
 	scope '/jornada-trabalho' do
 		get 'horas-extras' => 'jornada_trabalho#horasExtras'
-		get 'historico' => 'jornada_trabalho#listarHistorico'
-		
-		post 'registrar-ponto' => 'jornada_trabalho#registrarPonto'
-		post 'sincronizar' => 'jornada_trabalho#sincronizarOffline'
 	end
 	
+	resources :jornada_trabalho, path: "jornada-trabalho"
 	resources :eventos
 end

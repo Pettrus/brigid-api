@@ -7,13 +7,13 @@ class JornadaTrabalhoController < ApplicationController
 		render json: horas
 	end
 	
-	def listarHistorico
+	def index
 		registros = JornadaTrabalho.where(usuario_id: current_usuario.id).last(20)
 		
 		render json: registros
 	end
 	
-	def registrarPonto
+	def create
 		jornada = JornadaTrabalho.where(usuario_id: current_usuario.id, competencia: Date.today, fim: nil).first
 		
 		ActiveRecord::Base.transaction do
@@ -31,19 +31,6 @@ class JornadaTrabalhoController < ApplicationController
 					horas: horas
 				}
 			end
-		end
-	end
-	
-	def sincronizarOffline
-		ActiveRecord::Base.transaction do
-			if jornada_p[:id].nil?
-				jornada = JornadaTrabalho.new(jornada_p)
-				JornadaTrabalho.salvarOffline(jornada, current_usuario)
-			else
-				JornadaTrabalho.atualizarOffline(jornada_p, current_usuario)
-			end
-		
-			render json: true
 		end
 	end
 	
