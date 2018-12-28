@@ -9,11 +9,12 @@ class EventosController < ApplicationController
 	
 	def create
 		id = current_usuario.id
-		evento = Evento.new(evento_p)
+		evento = Evento.new(evento_p.except(:tipo))
 		evento.usuario_id = id
 		
 		if evento.valid?
 			ActiveRecord::Base.transaction do
+				evento.horas = evento.horas * evento_p[:tipo]
 				evento.save()
 				
 				usuario = Usuario.where(id: id).first
@@ -22,13 +23,13 @@ class EventosController < ApplicationController
 				render json: evento
 			end
 		else
-            render json: evento.errors.full_messages.to_json
+            render json: evento.errors.full_messages.to_json, status: :bad_request
         end
 	end
 	
 	private
 	
 	def evento_p
-		params.require(:evento).permit(:nome, :competencia, :horas)
+		params.require(:evento).permit(:nome, :competencia, :horas, :tipo)
 	end
 end

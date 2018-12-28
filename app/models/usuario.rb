@@ -8,6 +8,11 @@ class Usuario < ActiveRecord::Base
 	
 	has_many :jornada_trabalhos
 	
+	validates :nome, :email, presence: true, length: { minimum: 2, maximum: 120 }
+	validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+	validates :password, presence: true, length: { minimum: 8, maximum: 200 }, on: :create
+	validates :tempo_jornada, presence: true
+	
 	def self.notificarPonto
 		t = Time.now
 		hora = t.strftime('%H')
@@ -34,7 +39,7 @@ class Usuario < ActiveRecord::Base
 		if jornadaAnterior < 0
 			extras = usuario.horas_extras - jornadaAnterior
 		else
-			extras = 0
+			extras = usuario.horas_extras
 		end
 		
 		usuario.update_attributes(horas_extras: extras + horas)

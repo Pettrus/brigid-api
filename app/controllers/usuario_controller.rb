@@ -9,10 +9,15 @@ class UsuarioController < ApplicationController
 		end
 		
 		usuario = Usuario.new(usuario_p)
-		usuario.uid = usuario.email
-		usuario.save()
 		
-		render json: false
+		if usuario.valid?
+			usuario.uid = usuario.email
+			usuario.save()
+
+			render json: false
+		else
+			render json: usuario.errors.full_messages.to_json, status: :bad_request
+		end
 	end
 	
 	def webPush
