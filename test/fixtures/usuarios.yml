@@ -1,0 +1,6 @@
+usuario:
+ provider: 'email'
+ uid: 'teste@teste.com.br'
+ encrypted_password: <%= BCrypt::Password.create('test1234567') %>
+ nome: 'Teste'
+ email: 'teste@teste.com.br'

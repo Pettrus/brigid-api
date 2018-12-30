@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
-end
+#git_source(:github) do |repo_name|
+#  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+#  "https://github.com/#{repo_name}.git"
+#end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -22,6 +22,8 @@ gem 'webpush'
 gem 'strip_attributes'
 
 gem 'validates_timeliness', '~> 5.0.0.alpha3'
+
+gem 'simplecov', require: false, group: :test
 
 gem 'whenever', require: false
 
@@ -43,6 +45,7 @@ gem 'puma', '~> 3.0'
 group :development, :test do
  	# Call 'byebug' anywhere in the code to stop execution and get a debugger console
  	gem 'byebug', platform: :mri
+	gem 'rspec-rails', '~> 3.8'
 	
     gem 'capistrano',         require: false
     gem 'capistrano-figaro-yml', '~> 1.0.2'

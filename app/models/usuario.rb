@@ -19,17 +19,17 @@ class Usuario < ActiveRecord::Base
 		if hora.to_i == 8
 			usuario = Usuario.where.not(endpoint: nil).first
 
-			Webpush.payload_send(
-				message: "Não esqueça de bater o ponto",
-				endpoint: usuario.endpoint,
-				p256dh: usuario.p256dh,
-				auth: usuario.auth,
-				vapid: {
-					subject: "mailto:pettrus.sherlock@gmail.com",
-					public_key: ENV['PUBLIC_KEY_NOTIFICATION'],
-					private_key: ENV['PRIVATE_KEY_NOTIFICATION']
-				},
-			)
+			#Webpush.payload_send(
+			#	message: "Não esqueça de bater o ponto",
+			#	endpoint: usuario.endpoint,
+			#	p256dh: usuario.p256dh,
+			#	auth: usuario.auth,
+			#	vapid: {
+			#		subject: "mailto:pettrus.sherlock@gmail.com",
+			#		public_key: ENV['PUBLIC_KEY_NOTIFICATION'],
+			#		private_key: ENV['PRIVATE_KEY_NOTIFICATION']
+			#	},
+			#)
 		end
 	end
 	

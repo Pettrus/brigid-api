@@ -14,7 +14,7 @@ class EventosController < ApplicationController
 		
 		if evento.valid?
 			ActiveRecord::Base.transaction do
-				evento.horas = evento.horas * evento_p[:tipo]
+				evento.horas = evento.horas.to_i * evento_p[:tipo].to_i
 				evento.save()
 				
 				usuario = Usuario.where(id: id).first
