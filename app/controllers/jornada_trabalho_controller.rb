@@ -24,7 +24,7 @@ class JornadaTrabalhoController < ApplicationController
 					jornada: novaJornada
 				}
 			else
-				horas = JornadaTrabalho.atualizar(jornada, current_usuario)
+				horas = JornadaTrabalho.atualizar(jornada, current_usuario, (jornada.inicio.saturday? || jornada.inicio.sunday?))
 
 				render json: {
 					jornada: jornada,

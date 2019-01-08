@@ -11,7 +11,7 @@ class JornadaTrabalho < ApplicationRecord
 		return novaJornada
 	end
 	
-	def self.atualizar(jornada, usuario)
+	def self.atualizar(jornada, usuario, finalDeSemana)
 		jornadaAnterior = tempoJornadaDia(Date.today, usuario)
 		
 		if !jornadaAnterior.nil? && jornadaAnterior >= 0
@@ -19,7 +19,13 @@ class JornadaTrabalho < ApplicationRecord
 		else
 			diferenca = (jornadaAnterior.nil? ? 0 : usuario.tempo_jornada - (jornadaAnterior * -1))
 			
-			horas = ((Time.now - jornada.inicio) / 1.hours) - usuario.tempo_jornada + diferenca
+			horas = nil
+			
+			if finalDeSemana
+				horas = (Time.now - jornada.inicio) / 1.hours
+			else
+				horas = ((Time.now - jornada.inicio) / 1.hours) - usuario.tempo_jornada + diferenca
+			end
 		end
 		
 		jornada.update_attributes(fim: Time.now, horas: horas)
