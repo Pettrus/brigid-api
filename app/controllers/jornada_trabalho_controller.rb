@@ -8,7 +8,7 @@ class JornadaTrabalhoController < ApplicationController
 	end
 	
 	def index
-		registros = JornadaTrabalho.where(usuario_id: current_usuario.id).order(:competencia).limit(20)
+		registros = JornadaTrabalho.where(usuario_id: current_usuario.id).order(competencia: :desc).limit(20)
 		
 		render json: registros
 	end
